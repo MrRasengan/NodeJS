@@ -1,0 +1,12 @@
+{
+  "name": "mylibrgenrandompass",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "go": "node ./index.js"
+  },
+  "keywords": [],
+  "author": "Konstantin Gusev",
+  "license": "ISC",
+  "description": "Generate random passwords"
+}
