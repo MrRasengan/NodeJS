@@ -25,6 +25,16 @@ function loadCounter(filePath) {
 }
 
 /**
+ * Увеличивает значение счетчика просмотров для указанной страницы на 1 и сохраняет его.
+ * @param {string} filePath - Путь к файлу для хранения счетчика.
+ */
+function incrementCounter(filePath) {
+  const count = loadCounter(filePath);
+  const newCount = count + 1;
+  saveCounter(filePath, newCount);
+}
+
+/**
  * Сохраняет значение счетчика просмотров для указанной страницы.
  * @param {string} filePath - Путь к файлу для хранения счетчика.
  * @param {number} count - Значение счетчика.
@@ -35,26 +45,24 @@ function saveCounter(filePath, count) {
 
 // Обработчик для главной страницы "/"
 app.get('/', (req, res) => {
-  const count = loadCounter(indexCounterFilePath);
-  const newCount = count + 1;
-  saveCounter(indexCounterFilePath, newCount);
+  incrementCounter(indexCounterFilePath);
 
+  const count = loadCounter(indexCounterFilePath);
   res.send(`
     <h1>Главная страница</h1>
-    <p>Вы посетили эту страницу ${newCount} раз(а).</p>
+    <p>Вы посетили эту страницу ${count} раз(а).</p>
     <a href="/about">Перейти на страницу "О нас"</a>
   `);
 });
 
 // Обработчик для страницы "/about"
 app.get('/about', (req, res) => {
-  const count = loadCounter(aboutCounterFilePath);
-  const newCount = count + 1;
-  saveCounter(aboutCounterFilePath, newCount);
+  incrementCounter(aboutCounterFilePath);
 
+  const count = loadCounter(aboutCounterFilePath);
   res.send(`
     <h1>Страница "О нас"</h1>
-    <p>Вы посетили эту страницу ${newCount} раз(а).</p>
+    <p>Вы посетили эту страницу ${count} раз(а).</p>
     <a href="/">Перейти на главную страницу</a>
   `);
 });
